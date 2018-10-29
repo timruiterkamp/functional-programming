@@ -9,28 +9,18 @@ const obaKey = {
 const baseUrl = "http://obaliquid.staging.aquabrowser.nl/api/v1/";
 const queryType = "search";
 const searchQuery = {
-    q: "boek"
+    q: "boek",
+    title: "moviat"
 };
 
-// axios.get(baseUrl + searchQuery.query + `/?${searchQuery.q}authorization=${obaKey.public}`)
-
+const parsedUrl = `${baseUrl}${queryType}/?q=classification${
+    searchQuery.q
+}&authorization=${obaKey.public}&refine=true`;
 axios
-    .get(
-        `${baseUrl}${queryType}/?q=${searchQuery.q}&authorization=${
-            obaKey.public
-        }&refine=true`
-    )
+    .get(parsedUrl)
     .then(response => {
         parser(response.data, (err, result) => {
-            const data = Object.values(result);
-            const filterAquaData = data.map(x =>
-                Object.values(x).map(items => items)
-            );
-            const furtherFilter = filterAquaData.map(items =>
-                items.map(x => console.log(x))
-            );
-
-            console.log(Object.values(furtherFilter));
+            console.log(result);
         });
     })
     .catch(err => console.error(err));
