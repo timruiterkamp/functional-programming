@@ -1,0 +1,14 @@
+<html>
+    <% if(locals.info){ %>   
+      <script type='text/javascript'>
+      window.infoObject =<%-JSON.stringify(info)%>;
+       console.log( window.infoObject);
+   </script>
+    <%}%>
+    <body>
+        <div> <% if(locals.info){ %> 
+      <%=JSON.stringify(info)%>;
+      <%=info.key%>;
+ <%}%></div>
+    </body>
+</html>
