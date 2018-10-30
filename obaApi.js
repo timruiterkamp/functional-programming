@@ -14,6 +14,7 @@ class obaApi {
         return new Promise((resolve, reject) => {
             let { facet, ...restParams } = params;
             const queryFilters = queryString.stringify(restParams);
+            const facetExist = facet ? `&facet=type(${facet})` : "";
             let url =
                 this.url +
                 path +
@@ -21,8 +22,7 @@ class obaApi {
                 this.publicKey +
                 "&" +
                 queryFilters +
-                "&" +
-                `facet=type(${facet})`;
+                facetExist;
             console.log(url);
             axios
                 .get(url)
