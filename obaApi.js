@@ -12,14 +12,17 @@ class obaApi {
     get(endpoint, params) {
         const path = endpoint;
         return new Promise((resolve, reject) => {
-            const queryFilters = queryString.stringify(params);
+            let { facet, ...restParams } = params;
+            const queryFilters = queryString.stringify(restParams);
             let url =
                 this.url +
                 path +
                 "/?authorization=" +
                 this.publicKey +
                 "&" +
-                queryFilters;
+                queryFilters +
+                "&" +
+                `facet=type(${facet})`;
             console.log(url);
             axios
                 .get(url)

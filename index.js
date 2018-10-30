@@ -12,15 +12,19 @@ const api = new obaApi({
 });
 
 const filterQuery = {
-    q: "fuck",
-    sort: "year"
+    q: "fuck 2015",
+    sort: "title",
+    branch: "result",
+    facet: "book"
 };
 
 api.get("search", filterQuery).then(response => {
-    console.log(response);
     app.get("/", (req, res) => {
-        res.json(Object.values(response.data));
+        const newDataArray = Object.values(response.data);
+        const filteredDataArray = newDataArray.find(data => data);
+
+        res.json(filteredDataArray);
     });
     app.listen(port, () => console.log(`Listening on port ${port}`));
-    console.log(response.url);
+    // console.log(response.url);
 });
