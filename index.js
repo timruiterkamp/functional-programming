@@ -18,11 +18,14 @@ const filterQuery = {
     facet: "video"
 };
 
-api.get("search", filterQuery).then(response => {
-    app.get("/", (req, res) => {
-        const newDataArray = Object.values(response.data);
-        const filteredDataArray = newDataArray.map(data => data);
-        res.json(filteredDataArray);
-    });
-    app.listen(port, () => console.log(`Listening on port ${port}`));
-});
+const filterKey = "title";
+
+api.get("search", filterQuery, filterKey)
+    .then(response => {
+        api.response = response.data;
+    })
+    .catch(err => console.error(err));
+
+app.get("/", (req, res) => res.json(api.response)).listen(port, () =>
+    console.log(`Listening on port ${port}`)
+);
