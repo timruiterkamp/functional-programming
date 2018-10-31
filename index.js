@@ -12,7 +12,7 @@ const api = new obaApi({
 });
 
 const filterQuery = {
-    q: "boek",
+    q: "paddington",
     sort: "title",
     branch: "results",
     facet: "video"
@@ -20,9 +20,10 @@ const filterQuery = {
 
 const filterKey = "title";
 
-api.get("search", filterQuery, filterKey)
+api.getAll("search", filterQuery, filterKey)
     .then(response => {
         api.response = response.data;
+        console.log(response.data);
     })
     .catch(err => console.error(err));
 
