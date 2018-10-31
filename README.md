@@ -19,3 +19,12 @@ Onderzoeksvragen Functional programming:
 * Hoeveel boeken zijn er per taal binnen de Openbare bibliotheek in Nederland. Deelvraag is er een toename in arabische boeken? 
 * mogelijke optie mocht er data te vinden zijn, oba data weerleggen tegen json bestanden als bijvoorbeeld totale waarde van de boeken. Vraag: Wat is de totale waarde van de meest aanwezige boeken binnen de OBA.
 * Is er een toename in vrouwelijke of mannelijke afbeeldingen op covers van boeken in de afgelopen jaren.  
+
+## Gekozen onderzoeksvraag
+Hoeveel boeken moet je lezen om de waarde van je OBA abonnement eruit te halen
+
+### deelvragen:
+* Welke boeken zijn het meeste waard
+* Hoeveel boeken moet je lezen per abonnement
+* Zit er waarde verschil tussen genres
+* Hoevaak wordt een boek uitgeleend
