@@ -29,8 +29,8 @@ api.getAll('search', filterQuery, filterKey)
 				let newObj = {}
 				newObj.author = filter.findObject(items, 'author')
 				newObj.title = filter.findObject(items, 'title')
-				newObj.coverImage = filter.findObject(items, 'coverimage')
-				console.log(newObj)
+				newObj.publication = filter.findObject(items, 'publication')
+				newObj.languages = filter.findObject(items, 'language')
 				return newObj
 			}))
 	)
