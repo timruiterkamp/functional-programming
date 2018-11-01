@@ -1,5 +1,7 @@
 const obaApi = require('./api/obaApi')
 const filterHelper = require('./helpers/filterHelper')
+const bolScraper = require('./scraper/scraper')
+const scraper = new bolScraper()
 const filter = new filterHelper()
 const express = require('express')
 require('dotenv').config()
@@ -14,7 +16,7 @@ const api = new obaApi({
 })
 
 const filterQuery = {
-	q: 'blood',
+	q: 'roman',
 	refine: true,
 	librarian: true,
 	facet: 'genre(avonturenroman)'
@@ -39,14 +41,31 @@ api.getAll('search', filterQuery, filterKey)
 				const { author, title, languages } = x
 
 				values.push({
-					auteur: filter.findValue(author),
-					title: filter.findValue(title),
-					languages: filter.findValue(languages)
+					auteur:
+						author && filter.findValue(author)
+							? filter.findValue(author)
+							: '',
+					title:
+						title && filter.findValue(title)
+							? filter.findValue(title)
+							: '',
+					languages:
+						languages && filter.findValue(languages)
+							? filter.findValue(languages)
+							: ''
 				})
-				console.log(author)
 				return values
 			}))
 	)
+	// .then(res =>
+	// 	res.map(
+	// 		x =>
+	// 			(Object.values(x)[0].price = scraper.findPriceByItem(
+	// 				Object.values(x)[0].title
+	// 			))
+	// 	)
+	// )
+	// .then(res => console.log(res))
 	.catch(err => console.error('doet t niet'))
 
 app.get('/', (req, res) => res.json(filteredData)).listen(port, () =>

@@ -72,7 +72,7 @@ To give a good representation of the progress I've made I capture everyday and w
     -   Fixed my filter function, it now gives object with matching results instead of seperate            results that could'nt be matched.
     -   Updated my readme and process while thinking of next steps I should dive into
     -   Started on the webscraper for amazon to get the prices
-    -    
+    -   Tried connecting to amazon and ebay API but got stuck in authentication errors
     ***
 -   Friday
    
