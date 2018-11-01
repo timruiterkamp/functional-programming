@@ -2,6 +2,13 @@
 
 In this project I will research a case based on information i have extracted from the OBA api.
 
+## Base setup of the project
+```bash
+git clone https://github.com/timruiterkamp/functional-programming.git
+cd functional-programming
+npm install
+nodemon index
+```
 This project uses `.env`. The right setup is:
 
 ```
@@ -89,7 +96,7 @@ To tackle this problem I wrote a helper function that would use the objects and 
 
 To give a better perspective of this confusing story here is a layout of the object:  
 before:  
-```
+```JSON
 [
     {
     "id": [],
@@ -112,8 +119,10 @@ before:
     "undup-info": []
     }
 ]
-after:  
 ```
+
+after:  
+```JSON
 [
     {
     "author": [],
