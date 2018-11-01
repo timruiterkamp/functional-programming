@@ -9,22 +9,117 @@ PUBLIC_KEY=KEY
 SECRET_KEY=KEY
 ```
 
-## Mogelijke onderzoeksvragen
-Onderzoeksvragen Functional programming:
+## Possible research cases:
+* Are there more books to be lend out during spring than during fall, and what are the leading genres in these periods of time.  
+* Are the titles of childrenbooks under influence of populair babynames.   
+* Is there a significant increase in the usage of vulgare language.  
+* How many authors can be placed / matched with the letter of the alphabet.  
+* How many books are there per language within th public library of Amsterdam.  
+* Is there an increase in foreign languages with the upcoming tourists and foreign workers.  
+* What is the total worth of books withing a genre withing the public library of Amsterdam.  
+* How many books do you need to lend to get the value of your subscription back.  
+* Is there an increase in female or male images on the covers of books over the last years.  
 
-* Worden er in de lente meer boeken uitgebracht dan in de herfst en wat zijn de leidende genres in deze periodes.  
-* Worden kinderboeken titels beïnvloed door populaire babynamen.  
-* Is er een stijging in vulgair taalgebruik in titels en omschrijvingen.  
-* auteurs indelen op alfabetische volgorde, hoeveel auteurs zijn er per letter in het alfabet.  
-* Hoeveel boeken zijn er per taal binnen de Openbare bibliotheek in Nederland. Deelvraag is er een toename in arabische boeken? 
-* mogelijke optie mocht er data te vinden zijn, oba data weerleggen tegen json bestanden als bijvoorbeeld totale waarde van de boeken. Vraag: Wat is de totale waarde van de meest aanwezige boeken binnen de OBA.
-* Is er een toename in vrouwelijke of mannelijke afbeeldingen op covers van boeken in de afgelopen jaren.  
+## Chosen research case:
+How many books do you need to lend to get the value of your subscription back.  
 
-## Gekozen onderzoeksvraag
-Hoeveel boeken moet je lezen om de waarde van je OBA abonnement eruit te halen
+### subquestions:
+* What books are worth most
+* How many books do you have to read to return the subscription value
+* Is the a significant difference in value between genres
+* How many times does a book to be lend out
+* Is there a difference in value between languages
 
-### deelvragen:
-* Welke boeken zijn het meeste waard
-* Hoeveel boeken moet je lezen per abonnement
-* Zit er waarde verschil tussen genres
-* Hoevaak wordt een boek uitgeleend
+## Proces
+To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
+### Week 1
+
+-   Monday
+    -   Talks about the project  
+    -   I have connected to the api and started basic analysing the assets of the api  
+    -   I did set up a basic server and converted the xml to json to get a better overview  
+    ***
+-   Tuesday
+    -   Started thinking about questions  
+    -   Analysed multiple results I got and decided if I could use it for my possible research case.  
+    -   Build basic function to get and filter results from the API  
+    -   I ran into some difficulties filtering the right data and ended up in a way too long chain of      maps. Then I were introduced to jsonpath, it's a library that searches strings you pass into       it an returns the object.
+    ***
+-   Wednesday
+    -   Refactored my code to seperate helper functions from my request functions 
+    -   Supported a getAll function so more than 20 results would come in.
+    -   Rethinked my questions and possibilities and ended up chosing an awesome project
+    -   Set up the filter to match my criteria I needed
+    ***
+-   Thursday
+    -   Fixed my filter function, it now gives object with matching results instead of seperate            results that could'nt be matched.
+    -   Updated my readme and process while thinking of next steps I should dive into
+    -   Started on the webscraper for amazon to get the prices
+    -    
+    ***
+-   Friday
+   
+---
+
+### Week 2
+
+-   Monday
+
+    ***
+
+-   Tuesday
+   
+    ***
+-   Wednesday
+    
+    ***
+-   Thursday
+    
+    ***
+-   Friday
+   
+
+---
+
+## Problems I ran into  
+Problems with filtering I ran into:   
+To filter based on titles, authors and images I used the jsonpath package. The package works great but the downside was it deliverd seperate titles, authors and images that could not be matched with eachother. Because the behaviour of the package removes results it couldn't find. This results in a mismatch when i wanted to combine the results.
+  
+To tackle this problem I wrote a helper function that would use the objects and a string containing the search term. To keep the results matched I made a new object with the results found in a object containing all the terms.
+
+To give a better perspective of this confusing story here is a layout of the object:  
+before:  
+```
+[
+    {
+    "id": [],
+    "frabl": [],
+    "detail-page": [],
+    "coverimages": [],
+    "titles": [],
+    "authors": [],
+    "formats": [],
+    "identifiers": [],
+    "publication": [],
+    "classification": [],
+    "languages": [],
+    "subjects": [],
+    "description": [],
+    "summaries": [],
+    "notes": [],
+    "target-audiences": [],
+    "librarian-info": [],
+    "undup-info": []
+    }
+]
+after:  
+```
+[
+    {
+    "author": [],
+    "title": [],
+    "publication": [],
+    "languages": []
+    }
+]
+```

@@ -17,6 +17,13 @@
         "url": "https://github.com/timruiterkamp/functional-programming/issues"
     },
     "homepage": "https://github.com/timruiterkamp/functional-programming#readme",
+    "prettier": {
+      "tabWidth": 4,
+      "useTabs": true,
+      "singleQuote": true,
+      "semi": false,
+      "trailingComma": "none"
+    },
     "dependencies": {
         "axios": "^0.18.0",
         "dotenv": "^6.1.0",
