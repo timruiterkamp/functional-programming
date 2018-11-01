@@ -1,7 +1,6 @@
 # Front-end applications OBA
 
-In this project I will research a case based on information i have extracted from the OBA api.
-***  
+In this project I will research a case based on information i have extracted from the OBA api.  
 ## Table of contents
 
 * [Setup of the project](#Base)
@@ -11,7 +10,6 @@ In this project I will research a case based on information i have extracted fro
 * [Problems I ran into](#problems)
 
 
-***  
 
 ## Base setup of the project
 
@@ -26,8 +24,7 @@ This project uses `.env`. The right setup is:
 ```
 PUBLIC_KEY=KEY
 SECRET_KEY=KEY
-```
-***  
+```  
 ## Possible research cases
 
 * Are there more books to be lend out during spring than during fall, and what are the leading genres in these periods of time.  
@@ -39,17 +36,17 @@ SECRET_KEY=KEY
 * What is the total worth of books withing a genre withing the public library of Amsterdam.  
 * How many books do you need to lend to get the value of your subscription back.  
 * Is there an increase in female or male images on the covers of books over the last years.  
-***
+
 ## Chosen research case:
 How many books do you need to lend to get the value of your subscription back.  
-***
+
 ### subquestions:
 * What books are worth most
 * How many books do you have to read to return the subscription value
 * Is the a significant difference in value between genres
 * How many times does a book to be lend out
 * Is there a difference in value between languages
-***
+  
 ## Proces
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
@@ -98,8 +95,7 @@ To give a good representation of the progress I've made I capture everyday and w
     ***
 -   Friday
    
-
-***
+  
 ## Problems I ran into  
 Problems with filtering I ran into:   
 To filter based on titles, authors and images I used the jsonpath package. The package works great but the downside was it deliverd seperate titles, authors and images that could not be matched with eachother. Because the behaviour of the package removes results it couldn't find. This results in a mismatch when i wanted to combine the results.
