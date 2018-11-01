@@ -14,28 +14,41 @@ const api = new obaApi({
 })
 
 const filterQuery = {
-	q: 'harry potter',
+	q: 'blood',
 	refine: true,
 	librarian: true,
-	facet: 'book'
+	facet: 'genre(avonturenroman)'
 }
 const filterKey = ''
 
 api.getAll('search', filterQuery, filterKey)
 	.then(response => (api.response = response.data))
+	.then(apiData =>
+		apiData.map(items => {
+			let newObj = {}
+			newObj.author = filter.findObject(items, 'author')
+			newObj.title = filter.findObject(items, 'title')
+			newObj.languages = filter.findObject(items, 'language')
+			return newObj
+		})
+	)
 	.then(
-		apiData =>
-			(filteredItems = apiData.map(items => {
-				let newObj = {}
-				newObj.author = filter.findObject(items, 'author')
-				newObj.title = filter.findObject(items, 'title')
-				newObj.publication = filter.findObject(items, 'publication')
-				newObj.languages = filter.findObject(items, 'language')
-				return newObj
+		res =>
+			(filteredData = Object.values(res).map(x => {
+				const values = []
+				const { author, title, languages } = x
+
+				values.push({
+					auteur: filter.findValue(author),
+					title: filter.findValue(title),
+					languages: filter.findValue(languages)
+				})
+				console.log(author)
+				return values
 			}))
 	)
-	.catch(err => console.error(err))
+	.catch(err => console.error('doet t niet'))
 
-app.get('/', (req, res) => res.json(filteredItems)).listen(port, () =>
+app.get('/', (req, res) => res.json(filteredData)).listen(port, () =>
 	console.log(`Listening on port ${port}`)
 )

@@ -7,7 +7,7 @@ class getter {
 		const path = endpoint
 		let { facet, ...restParams } = params
 		const queryFilters = queryString.stringify(restParams)
-		const facetExist = facet ? `&facet=type(${facet})` : ''
+		const facetExist = facet ? `&facet=${facet}` : ''
 		const url = `${setUrl}${path}/?authorization=${key}&${queryFilters}${facetExist}`
 		console.log(url)
 		return url
