@@ -1,7 +1,7 @@
 # Front-end applications OBA
 
 In this project I will research a case based on information i have extracted from the OBA api.  
-## Table of contents
+## Table of contents (Not yet working)
 
 * [Setup of the project](#Base)
 * [Possible research cases](#possible)
