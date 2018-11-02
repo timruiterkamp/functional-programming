@@ -169,10 +169,10 @@ scrape('jaws')
 * Axios
 
 ## Code description
-```
-index.js - Base of the code where the magic happens
-./api - Here is where the OBA api functions hold up
-./helpers/filterHelpers - Handle filter requests
-./helpers/getHelpers - Handle get requests 
-./scraper - The bol.com scraper logic
-```
+| Files   |      Description      |
+|----------|-------------|
+| index.js |  Base of the code where the magic happens |
+| ./api |   Here is where the OBA api functions hold up   |
+| ./helpers/filterHelpers |  Handle filter requests  |
+| ./helpers/getHelpers | Handle get requests |
+| ./scraper |    The bol.com scraper logic   |
