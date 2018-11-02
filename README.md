@@ -55,6 +55,15 @@ How many books do you need to lend to get the value of your subscription back.
 
 
 ## Proces
+
+### Yet TODO
+- [x] Get price of a product
+- [ ] Sort on 'tweedehands' and 'Nederlandstalig'
+- [x] Create new object with the right data
+- [ ] Create new object with prices
+- [ ] Refactor index to clean code
+- [ ] Support multiple genres
+
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
 
@@ -143,7 +152,6 @@ after:
     {
     "author": [],
     "title": [],
-    "publication": [],
     "languages": []
     }
 ]
