@@ -180,7 +180,8 @@ scrape('jaws')
 | Files   |      Description      |
 |----------|-------------|
 | index.js |  Base of the code where the magic happens |
-| ./api |   Here is where the OBA api functions hold up   |
+| ./api/obaApi |   Here is where the OBA api functions hold up   |
+| ./api/subscriptions |   The value of the different subscriptions   |
 | ./helpers/filterHelpers |  Handle filter requests  |
 | ./helpers/getHelpers | Handle get requests |
 | ./scraper |    The bol.com scraper logic   |

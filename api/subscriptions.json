@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Oba Junior",
+        "price": 0
+    },
+    {
+        "name": "Oba Totaal",
+        "price": 42,
+        "young-adults": 22,
+        "low-income": 5,
+        "AdamNet-card": 55
+    },
+    {
+        "name": "Oba basic",
+        "price": 32,
+        "elder": 22,
+        "AdamNet-card": 45
+    }
+]
