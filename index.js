@@ -3,6 +3,8 @@ const filterValuesInObject = require('./helpers/filterHelper')
 	.filterValuesInObject
 const scrape = require('./scraper/scraper').findPriceByItem
 const newObj = require('./helpers/objectHelper').createNewObject
+var fs = require('fs')
+
 const express = require('express')
 require('dotenv').config()
 
@@ -29,7 +31,14 @@ api.getAll('search', filterQuery, filterKey)
 		apiData.map(items => newObj(items, ['author', 'title', 'language']))
 	)
 	.then(res => (filteredData = filterValuesInObject(res)))
-	.then(res => console.log(res))
+	.then(res =>
+		fs.writeFile(
+			'./api/cleanBookData.json',
+			JSON.stringify(res),
+			'utf8',
+			err => console.error('write file kan niet', err)
+		)
+	)
 	.catch(err => console.error('doet t niet'))
 
 app.get('/', (req, res) => res.json(filteredData)).listen(port, () =>
