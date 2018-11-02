@@ -1,5 +1,6 @@
 const obaApi = require('./api/obaApi')
-const filter = require('./helpers/filterHelper')
+const filterValuesInObject = require('./helpers/filterHelper')
+	.filterValuesInObject
 const scrape = require('./scraper/scraper').findPriceByItem
 const newObj = require('./helpers/objectHelper').createNewObject
 const express = require('express')
@@ -27,41 +28,7 @@ api.getAll('search', filterQuery, filterKey)
 	.then(apiData =>
 		apiData.map(items => newObj(items, ['author', 'title', 'language']))
 	)
-	.then(
-		res =>
-			(filteredData = Object.values(res).map(x => {
-				const values = []
-				const { author, title, languages } = x
-
-				values.push({
-					auteur:
-						author && filter.findValue(author)
-							? filter.findValue(author)
-							: '',
-					title:
-						title && filter.findValue(title)
-							? filter.findValue(title)
-							: '',
-					languages:
-						languages && filter.findValue(languages)
-							? filter.findValue(languages)
-							: ''
-				})
-				return values
-			}))
-	)
-	.then(res => {
-		scrape('Jaws')
-		res.map(
-			x => {
-				const titels = Object.values(x)[0].title
-				// console.log(filter.filterStringOnSpecChars(titels))
-			}
-			// (Object.values(x)[0].price = scraper.findPriceByItem(
-			// 	Object.values(x)[0].title
-			// ))
-		)
-	})
+	.then(res => (filteredData = filterValuesInObject(res)))
 	.then(res => console.log(res))
 	.catch(err => console.error('doet t niet'))
 
