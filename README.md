@@ -148,3 +148,14 @@ after:
     }
 ]
 ```
+## The bol.com scraper
+The bol.com scraper is a little scraper that returns the value of the first hit on bol.com in the book section of the page.
+
+To use the scraper anywhere you can just do the following:
+```javascript
+const bolScraper = require('./scraper/scraper')
+const scrape = new bolScraper().findPriceByItem
+
+// this beneath will scrape the website of bol.com for jaws books and returns the value of the first one
+scrape('jaws')
+```
