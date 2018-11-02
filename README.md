@@ -160,3 +160,19 @@ const scrape = new bolScraper().findPriceByItem
 scrape('jaws')
 // returns 16.99 for the english version
 ```
+
+## Techniques used
+* Puppeteer
+* NodeJs
+* Promises
+* jsonpath
+* Axios
+
+## Code description
+```
+index.js - Base of the code where the magic happens
+./api - Here is where the OBA api functions hold up
+./helpers/filterHelpers - Handle filter requests
+./helpers/getHelpers - Handle get requests 
+./scraper - The bol.com scraper logic
+```
