@@ -47,6 +47,13 @@ How many books do you need to lend to get the value of your subscription back.
 * How many times does a book to be lend out
 * Is there a difference in value between languages
   
+
+## Outcomes along the way:
+* I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
+* There are 7 dutch translated Jaws books needed to get the subscription value back
+* The english (second hand) version of Jaws is twice as expensive as the dutch translated version
+
+
 ## Proces
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
@@ -73,9 +80,10 @@ To give a good representation of the progress I've made I capture everyday and w
     -   Updated my readme and process while thinking of next steps I should dive into
     -   Started on the webscraper for amazon to get the prices
     -   Tried connecting to amazon and ebay API but got stuck in authentication errors
+    -   After multiple tries I decided to create my own scraper with puppeteer and I got the prices!
     ***
 -   Friday
-   
+    -   Finetuned the scraper to select only books and using the filters 'nederlandstaling' and            'tweedehans' on the bol.com website to get realistic results.
 ---
 
 ### Week 2

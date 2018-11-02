@@ -57,15 +57,19 @@ api.getAll('search', filterQuery, filterKey)
 				return values
 			}))
 	)
-	// .then(res =>
-	// 	res.map(
-	// 		x =>
-	// 			(Object.values(x)[0].price = scraper.findPriceByItem(
-	// 				Object.values(x)[0].title
-	// 			))
-	// 	)
-	// )
-	// .then(res => console.log(res))
+	.then(res => {
+		scraper.findPriceByItem('Jaws')
+		res.map(
+			x => {
+				const titels = Object.values(x)[0].title
+				// console.log(filter.filterStringOnSpecChars(titels))
+			}
+			// (Object.values(x)[0].price = scraper.findPriceByItem(
+			// 	Object.values(x)[0].title
+			// ))
+		)
+	})
+	.then(res => console.log(res))
 	.catch(err => console.error('doet t niet'))
 
 app.get('/', (req, res) => res.json(filteredData)).listen(port, () =>
