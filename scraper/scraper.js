@@ -12,8 +12,8 @@ class scraper {
 		await page.type('#searchfor', searchTerm)
 		await page.select('#product_select', 'books_all')
 		await page.click('input.search-btn')
-		await page.waitForSelector('input#facet_1426')
-		await page.select('input#facet_1426')
+		// await page.waitForSelector('input#facet_1426')
+		// await page.select('input#facet_1426')
 		await page.waitForSelector('a.product-title')
 		const productValue = await page.evaluate(() =>
 			document

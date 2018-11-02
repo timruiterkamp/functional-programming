@@ -158,4 +158,5 @@ const scrape = new bolScraper().findPriceByItem
 
 // this beneath will scrape the website of bol.com for jaws books and returns the value of the first one
 scrape('jaws')
+// returns 16.99 for the english version
 ```

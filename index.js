@@ -1,7 +1,7 @@
 const obaApi = require('./api/obaApi')
 const filterHelper = require('./helpers/filterHelper')
 const bolScraper = require('./scraper/scraper')
-const scraper = new bolScraper()
+const scrape = new bolScraper().findPriceByItem
 const filter = new filterHelper()
 const express = require('express')
 require('dotenv').config()
@@ -58,7 +58,7 @@ api.getAll('search', filterQuery, filterKey)
 			}))
 	)
 	.then(res => {
-		scraper.findPriceByItem('Jaws')
+		scrape('Jaws')
 		res.map(
 			x => {
 				const titels = Object.values(x)[0].title
