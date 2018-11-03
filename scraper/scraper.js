@@ -11,8 +11,22 @@ findPriceByItem = async searchTerm => {
 	await page.type('#searchfor', searchTerm)
 	await page.select('#product_select', 'books_all')
 	await page.click('input.search-btn')
-	// await page.waitForSelector('input#facet_1426')
-	// await page.select('input#facet_1426')
+	try {
+		await page.waitForSelector('#facet_1426')
+		await page.click('#facet_1426')
+		console.log('bestaaaat')
+	} catch (err) {
+		console.log("The element didn't appear.")
+	}
+
+	try {
+		await page.waitForSelector('#facet_8293')
+		await page.click('#facet_8293')
+		console.log('komt hier, facet8293')
+	} catch (err) {
+		console.log("The element didn't appear.")
+	}
+
 	await page.waitForSelector('a.product-title')
 	const productValue = await page.evaluate(() =>
 		document

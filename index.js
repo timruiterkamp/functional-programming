@@ -30,17 +30,17 @@ api.getAll('search', filterQuery, filterKey)
 	.then(apiData =>
 		apiData.map(items => newObj(items, ['author', 'title', 'language']))
 	)
-	.then(res => (filteredData = filterValuesInObject(res)))
-	.then(res =>
-		fs.writeFile(
-			'./api/cleanBookData.json',
-			JSON.stringify(res),
-			'utf8',
-			err => console.error('write file kan niet', err)
-		)
-	)
+	.then(res => (filteredValues = filterValuesInObject(res)))
+	.then(res => scrape('jaws'))
 	.catch(err => console.error('doet t niet'))
 
-app.get('/', (req, res) => res.json(filteredData)).listen(port, () =>
-	console.log(`Listening on port ${port}`)
-)
+app.get('/', (req, res) => {
+	fs.writeFile(
+		'./api/cleanBookData.json',
+		JSON.stringify(filteredValues),
+		'utf8',
+		err => console.error('write file kan niet', err)
+	)
+
+	res.json(filteredValues)
+}).listen(port, () => console.log(`Listening on port ${port}`))
