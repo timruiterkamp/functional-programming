@@ -1,10 +1,9 @@
 // inspired by Rijk van Zanten and the convert that returns a promise by Folkert-Jan van der Pol
 const axios = require('axios')
-const getHelpers = require('../helpers/getHelpers')
+const getter = require('../helpers/getHelpers')
 const convert = require('xml-to-json-promise')
 const jp = require('jsonpath')
 
-const getter = new getHelpers()
 class obaApi {
 	constructor(options) {
 		;(this.publicKey = options.publicKey), (this.secret = options.secret)
