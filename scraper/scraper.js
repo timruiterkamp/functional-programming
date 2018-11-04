@@ -1,18 +1,17 @@
 const puppeteer = require('puppeteer')
 
 findPriceByItem = async searchTerm => {
-	const browser = await puppeteer.launch()
+	const browser = await puppeteer.launch({ devtools: true })
 	const page = await browser.newPage()
 	await page.setViewport({ width: 1280, height: 800 })
 	await page.goto('https://www.bol.com/nl/', {
-		waitLoad: true,
-		waitNetworkIdle: true // defaults to false
+		waitUntil: 'networkidle0'
 	})
 	await page.type('#searchfor', searchTerm)
 	await page.select('#product_select', 'books_all')
 	await page.click('input.search-btn')
+	await page.waitForNavigation({ waitUntil: 'networkidle0' })
 	try {
-		await page.waitForSelector('#facet_1426')
 		await page.click('#facet_1426')
 		console.log('bestaaaat')
 	} catch (err) {
@@ -20,7 +19,6 @@ findPriceByItem = async searchTerm => {
 	}
 
 	try {
-		await page.waitForSelector('#facet_8293')
 		await page.click('#facet_8293')
 		console.log('komt hier, facet8293')
 	} catch (err) {

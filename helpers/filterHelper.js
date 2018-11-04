@@ -8,7 +8,7 @@ filterValuesInObject = res => {
 		const values = []
 		const { author, title, language } = x
 		values.push({
-			auteur: author && findValue(author) ? findValue(author) : '',
+			author: author && findValue(author) ? findValue(author) : '',
 			title: title && findValue(title) ? findValue(title) : '',
 			language: language && findValue(language) ? findValue(language) : ''
 		})

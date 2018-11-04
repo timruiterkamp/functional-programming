@@ -47,6 +47,47 @@ How many books do you need to lend to get the value of your subscription back.
 * How many times does a book to be lend out
 * Is there a difference in value between languages
   
+## Overview research case:
+To get the right results I had to analyze te API from the OBA (public library of Amsterdam) and choose the needed subjects through filtering.  
+So the first steps I had to take was looping through the data and filter on the chosen subject: author,title, language and eventually publication data. After getting all the right information per subject I created a new dataset with just the right data.  
+I used this new dataset to analyze the title for the scraper I build and then collecting the price per item and adding it to the right subject. This way I had a clean dataset with information about the book and belonging price. Next thing was just creating a new dataset with the subscription data which I could use to make the needed calculations.
+  
+After these steps to clean out the data en creating a new dataset, I started calculating total prices to see what books and how many books you would need to read to get your subscription value back.
+
+Overview of the subscriptions:
+```JSON
+[
+    {
+        "name": "Oba Junior",
+        "price": 0
+    },
+    {
+        "name": "Oba Totaal",
+        "price": 42,
+        "young-adults": 22,
+        "low-income": 5,
+        "AdamNet-card": 55
+    },
+    {
+        "name": "Oba basic",
+        "price": 32,
+        "elder": 22,
+        "AdamNet-card": 45
+    }
+]
+```
+New dataset item with the cleaned data:
+```JSON
+[
+		{
+			"author": "Peter Benchley",
+			"title": "Jaws / [starring] Robert Shaw ... [et al.] ; mus. by John Williams ; prod. by Richard D. Zanuck and David Brown ; dir. by Steven Spielberg",
+            "language": "mul",
+            "price": 6
+		}
+	],
+```
+
 
 ## Outcomes along the way:
 * I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
@@ -61,8 +102,8 @@ How many books do you need to lend to get the value of your subscription back.
 - [ ] Sort on 'tweedehands' and 'Nederlandstalig'
 - [x] Create new object with the right data
 - [ ] Create new object with prices
-- [ ] Refactor index to clean code
-- [ ] Support multiple genres
+- [X] Refactor index to clean code
+- [ ] Support multiple genres (Nice to have)
 
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
