@@ -79,13 +79,13 @@ Overview of the subscriptions:
 New dataset item with the cleaned data:
 ```JSON
 [
-		{
-			"author": "Peter Benchley",
-			"title": "Jaws / [starring] Robert Shaw ... [et al.] ; mus. by John Williams ; prod. by Richard D. Zanuck and David Brown ; dir. by Steven Spielberg",
-            "language": "mul",
-            "price": 6
-		}
-	],
+    {
+        "author": "Peter Benchley",
+        "title": "Jaws / [starring] Robert Shaw ... [et al.] ; mus. by John Williams ; prod. by Richard D. Zanuck and David Brown ; dir. by Steven Spielberg",
+        "language": "mul",
+        "price": 6
+    }
+]
 ```
 
 
