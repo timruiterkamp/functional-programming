@@ -31,7 +31,7 @@ api.getAll('search', filterQuery, filterKey)
 		apiData.map(items => newObj(items, ['author', 'title', 'language']))
 	)
 	.then(res => (filteredValues = filterValuesInObject(res)))
-	.then(res => scrape('jaws'))
+	.then(res => scrape('Het geheim van pater Brugman'))
 	.catch(err => console.error('doet t niet'))
 
 app.get('/', (req, res) => {
