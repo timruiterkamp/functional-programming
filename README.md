@@ -99,6 +99,9 @@ New dataset item with the cleaned data:
 ]
 ```
 
+### Overview from all the results
+!['All filtered results'](https://github.com/timruiterkamp/functional-programming/blob/master/json-overview.png)
+
 ## Sketch of the possible outcome
 I am aiming for a visual representation of the amount of books that are needed to reach the costs of the subscription. The block for the books can be hovered to create an information layer about the book.
 
@@ -108,6 +111,7 @@ I am aiming for a visual representation of the amount of books that are needed t
 * I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
 * There are 7 dutch translated Jaws books needed to get the subscription value back
 * The english (second hand) version of Jaws is twice as expensive as the dutch translated version
+* Unfortunately I couldn't track al the prices from bol.com
 
 
 ## Proces
