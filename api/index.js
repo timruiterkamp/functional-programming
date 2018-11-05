@@ -1,7 +1,7 @@
 require('dotenv').config()
 const fs = require('fs')
 const express = require('express')
-const obaApi = require('./api/obaApi')
+const obaApi = require('./OBAapiHandler/obaApi')
 const initScraper = require('./scraper/scraper')
 const {
 	filterValuesInObject,
@@ -11,16 +11,18 @@ const { createNewObject: newObj } = require('./helpers/objectHelper')
 
 const app = express()
 const port = 1337
-
-app.get('/', (req, res) => {
-	readBookJson('./api/cleanBookData.json', data => {
-		if (data) {
-			res.json(JSON.parse(data))
-		} else {
-			res.write('<h2>Loading</h2>')
-		}
+app.set('views', 'views')
+	.set('view engine', 'ejs')
+	.get('/api', (req, res) => {
+		readBookJson('./cleanBookData.json', data => {
+			if (data) {
+				res.json(JSON.parse(data))
+			} else {
+				res.write('<h2>Loading</h2>')
+			}
+		})
 	})
-}).listen(port, () => console.log(`Listening on port ${port}`))
+	.listen(port, () => console.log(`Listening on port ${port}`))
 
 function readBookJson(filePath, cb) {
 	fs.readFile(filePath, 'utf8', function(err, data) {
