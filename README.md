@@ -253,14 +253,17 @@ initScraper().then(scraper => {
 ## Code description
 | Files   |      Description      |
 |----------|-------------|
-| index.js |  Base of the code where the magic happens |
-| ./api/obaApi |   Here is where the OBA api functions hold up   |
+| index.html |  Base of the code where the visualisations take place|
+| ./style/* |  Styling elements |
+| ./scripts/* |  Script for the website, mainly for visualizations  |
+| ./api/index.js |  Base of the code where the api magic happens |
+| ./api/OBAapiHandler/obaApi |   Here is where the OBA api functions hold up   |
 | ./api/cleanBookData |   This file contains the clean data with prices   |
 | ./api/subscriptions |   The value of the different subscriptions   |
-| ./helpers/filterHelpers |  Handle filter requests  |
-| ./helpers/getHelpers | Handle get requests |
-| ./helpers/objectHelper | Handle Object requests |
-| ./scraper/scraper |    The bol.com scraper logic   |
+| ./api/helpers/filterHelpers |  Handle filter requests  |
+| ./api/helpers/getHelpers | Handle get requests |
+| ./api/helpers/objectHelper | Handle Object requests |
+| ./api/scraper/scraper |    The bol.com scraper logic   |
 
 ## License
 [MIT LICENSE](license.txt)
