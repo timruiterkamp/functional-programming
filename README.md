@@ -102,7 +102,7 @@ New dataset item with the cleaned data:
 ## Sketch of the possible outcome
 I am aiming for a visual representation of the amount of books that are needed to reach the costs of the subscription. The block for the books can be hovered to create an information layer about the book.
 
-!['Idea of the possible outcome of my project'](https://github.com/timruiterkamp/functional-programming/sketch-mockup-functional-program.jpg)
+!['Idea of the possible outcome of my project'](https://github.com/timruiterkamp/functional-programming/blob/master/sketch-mockup-functional-program.jpg)
 
 ## Outcomes along the way
 * I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
