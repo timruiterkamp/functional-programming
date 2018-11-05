@@ -155,12 +155,21 @@ To give a good representation of the progress I've made I capture everyday and w
     ***
 -   Friday
     -   Finetuned the scraper to select only books and using the filters 'nederlandstaling' and            'tweedehans' on the bol.com website to get realistic results.
+    -   Got an awesome talk about D3 and Observable where I got new insights in the possibilites of        the D3 library.
+    -   I refactored a lot of my code into more functional setup
 ---
 
 ### Week 2
 
 -   Monday
-
+    -   Over the weekend I finished my scraper and support one or many searches
+    -   I refactored a lot of code to make it more neat
+    -   On monday I seperated my api from my get requests as this shouldn't intervere eachother
+    -   Build in support for cases where no data is available and when there is data available
+    -   I've got more information about user safety on the web through a talk from Bits of Freedom
+    -   An presentation of D3 showed more in-depth knowledge about the working of certain elements in      the library and some showcases were shown to get us started
+    -   I added my sketches to the readme and updated it with more relevant information
+    -   Started with the D3 library in combination with my own filtered data
     ***
 
 -   Tuesday
