@@ -234,12 +234,13 @@ The bol.com scraper is a little scraper that returns the value of the first hit 
 
 To use the scraper anywhere you can just do the following:
 ```javascript
-const bolScraper = require('./scraper/scraper')
-const scrape = new bolScraper().findPriceByItem
+const initScraper = require('./scraper/scraper')
 
 // this beneath will scrape the website of bol.com for jaws books and returns the value of the first one
-scrape('jaws')
-// returns 16.99 for the english version
+initScraper().then(scraper => {
+    scraper.findPricesByItems('jaws')
+}
+// returns €6 for the dutch version
 ```
 
 ## Techniques used
@@ -254,10 +255,12 @@ scrape('jaws')
 |----------|-------------|
 | index.js |  Base of the code where the magic happens |
 | ./api/obaApi |   Here is where the OBA api functions hold up   |
+| ./api/cleanBookData |   This file contains the clean data with prices   |
 | ./api/subscriptions |   The value of the different subscriptions   |
 | ./helpers/filterHelpers |  Handle filter requests  |
 | ./helpers/getHelpers | Handle get requests |
-| ./scraper |    The bol.com scraper logic   |
+| ./helpers/objectHelper | Handle Object requests |
+| ./scraper/scraper |    The bol.com scraper logic   |
 
 ## License
 [MIT LICENSE](license.txt)
