@@ -1,6 +1,8 @@
 # Front-end applications OBA
 
-In this project I will research a case based on information i have extracted from the OBA api.  
+In this project I will research a case based on information i have extracted from the OBA Api. 
+The chosen case can be found [here](#Chosen-research-case). The project overal was very fun to do and with the thought of challenging myself by not blocking the possibilities of just the OBA Api, I used Puppeteer to create my own scraper that scrapes prices of books.
+
 ## Table of contents
 
 * [Installation of the project](#Installation-of-the-project)
