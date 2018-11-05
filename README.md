@@ -3,15 +3,24 @@
 In this project I will research a case based on information i have extracted from the OBA api.  
 ## Table of contents (Not yet working)
 
-* [Setup of the project](#Base)
-* [Possible research cases](#possible)
-* [Chosen research case](#chosen)
-* [proces](#proces)
-* [Problems I ran into](#problems)
+* [Installation of the project](#Installation-of-the-project)
+* [Possible research cases](#Possible-research-cases)
+* [Chosen research case](#Chosen-research-case)
+    * [Subquestions](#subquestions)
+* [Overview research case](#Overview-research-case)
+    * [Results along the way](#Outcomes-along-the-way)
+* [Proces](#Proces)
+    * [Week 1](#Week-1)
+    * [Week 2](#Week-2)
+    * [Problems I ran into](#problems)
+* [The scraper](#The-bol.com-scraper)
+* [Techniques used](#Techniques-used)
+* [Code description](#Code-description)
 
 
 
-## Base setup of the project
+
+## Installation of the project
 
 ```bash
 git clone https://github.com/timruiterkamp/functional-programming.git
@@ -37,17 +46,17 @@ SECRET_KEY=KEY
 * How many books do you need to lend to get the value of your subscription back.  
 * Is there an increase in female or male images on the covers of books over the last years.  
 
-## Chosen research case:
+## Chosen research case
 How many books do you need to lend to get the value of your subscription back.  
 
-### subquestions:
+### subquestions
 * What books are worth most
 * How many books do you have to read to return the subscription value
 * Is the a significant difference in value between genres
 * How many times does a book to be lend out
 * Is there a difference in value between languages
   
-## Overview research case:
+## Overview research case
 To get the right results I had to analyze te API from the OBA (public library of Amsterdam) and choose the needed subjects through filtering.  
 So the first steps I had to take was looping through the data and filter on the chosen subject: author,title, language and eventually publication data. After getting all the right information per subject I created a new dataset with just the right data.  
 I used this new dataset to analyze the title for the scraper I build and then collecting the price per item and adding it to the right subject. This way I had a clean dataset with information about the book and belonging price. Next thing was just creating a new dataset with the subscription data which I could use to make the needed calculations.
@@ -89,7 +98,7 @@ New dataset item with the cleaned data:
 ```
 
 
-## Outcomes along the way:
+## Outcomes along the way
 * I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
 * There are 7 dutch translated Jaws books needed to get the subscription value back
 * The english (second hand) version of Jaws is twice as expensive as the dutch translated version
@@ -226,3 +235,6 @@ scrape('jaws')
 | ./helpers/filterHelpers |  Handle filter requests  |
 | ./helpers/getHelpers | Handle get requests |
 | ./scraper |    The bol.com scraper logic   |
+
+## License
+[MIT LICENSE](license.txt)
