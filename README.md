@@ -26,8 +26,8 @@ The chosen case can be found [here](#Chosen-research-case). The project overal w
 
 ```bash
 git clone https://github.com/timruiterkamp/functional-programming.git
-cd functional-programming
-npm install
+cd functional-programming/api
+npm install or npm i
 nodemon index
 ```
 This project uses `.env`. The right setup is:
