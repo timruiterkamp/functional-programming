@@ -68,7 +68,7 @@ function startScraping() {
 			.then(booksWithPrices => {
 				console.log(booksWithPrices)
 				fs.writeFile(
-					'./api/cleanBookData.json',
+					'./cleanBookData.json',
 					JSON.stringify(booksWithPrices),
 					'utf8',
 					err => console.error('write file kan niet', err)
