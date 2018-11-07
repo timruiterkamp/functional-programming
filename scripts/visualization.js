@@ -7,76 +7,63 @@ const filterData = fetch('http://localhost:1337/api')
 
 filterData
 	.then(data => {
-		buildBarChart(data)
-		const priceSelection = document.querySelector('#bookFiltering')
-		priceSelection.addEventListener('change', e => {
-			localStorage.setItem('selected', e.target.value)
-			buildBarChart(data)
-			window.location.reload()
+		const bookStacks = createStack(data, 'price')
+		const chosenBooks = bookStacks.allBooks[0]
+		const max = bookStacks.allBooks.map(d => {
+			const value = d.map(item => item[1]).map(items => items)
+			return d3.max(value)
 		})
+		const margin = { top: 20, right: 160, bottom: 35, left: 30 },
+			width = 960 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom,
+			barHeight = 20
+
+		let x = d3
+			.scaleLinear()
+			.domain([0, max[0]])
+			.range([0, 500])
+
+		const container = d3
+			.select('svg')
+			.attr('width', width)
+			.attr('height', 20 * data.length)
+
+		const bar = container
+			.selectAll('g')
+			.data(chosenBooks)
+			.enter()
+			.append('g')
+			.attr('transform', function(d, i) {
+				return 'translate(0,' + i * 20 + ')'
+			})
+
+		bar.append('rect')
+			.attr('width', d => d.data.price)
+			// add this attribute to change the color of the rect
+			.attr('fill', function(d) {
+				if (d[1] > 25) {
+					return 'red'
+				} else if (d[1] > 10) {
+					return 'orange'
+				}
+				return 'yellow'
+			})
+			.attr('height', 20 - 1)
+
+		bar.append('text')
+			.attr('x', d => d.data.price)
+			.attr('y', barHeight / 2)
+			.attr('dy', '.35em')
+			// add this attribute to change the color of the text
+			.attr('fill', function(d) {
+				if (d.data.title > 10) {
+					return 'purple'
+				}
+				return 'black'
+			})
+			.text(d => `${d.data.title}, €${d.data.price}`)
 	})
 	.catch(err => console.error('no data'))
-
-function buildBarChart(data) {
-	const bookStacks = createStack(data, 'price')
-	console.log(localStorage.getItem('selected'))
-	const chosenBooks = localStorage.getItem('selected')
-		? bookStacks[localStorage.getItem('selected')]
-		: bookStacks.allBooks[0]
-	const max = bookStacks.allBooks.map(d => {
-		const value = d.map(item => item[1]).map(items => items)
-		return d3.max(value)
-	})
-	const margin = { top: 20, right: 160, bottom: 35, left: 30 },
-		width = 960 - margin.left - margin.right,
-		height = 500 - margin.top - margin.bottom,
-		barHeight = 20
-
-	let x = d3
-		.scaleLinear()
-		.domain([0, max[0]])
-		.range([0, 500])
-
-	const container = d3
-		.select('svg')
-		.attr('width', width)
-		.attr('height', 20 * data.length)
-
-	const bar = container
-		.selectAll('g')
-		.data(chosenBooks)
-		.enter()
-		.append('g')
-		.attr('transform', function(d, i) {
-			return 'translate(0,' + i * 20 + ')'
-		})
-
-	bar.append('rect')
-		.attr('width', d => d.data.price)
-		// add this attribute to change the color of the rect
-		.attr('fill', function(d) {
-			if (d[1] > 25) {
-				return 'red'
-			} else if (d[1] > 10) {
-				return 'orange'
-			}
-			return 'yellow'
-		})
-		.attr('height', 20 - 1)
-
-	bar.append('text')
-		.attr('x', d => d.data.price)
-		.attr('y', barHeight / 2)
-		.attr('dy', '.35em')
-		// add this attribute to change the color of the text
-		.attr('fill', function(d) {
-			if (d.data.title > 10) {
-				return 'purple'
-			}
-			return 'black'
-		})
-		.text(d => `${d.data.title}, €${d.data.price}`)
-}
 
 /**
  * Create a d3 stack
