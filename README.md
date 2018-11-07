@@ -126,7 +126,9 @@ I am aiming for a visual representation of the amount of books that are needed t
 - [X] Refactor index to clean code
 - [ ] Support multiple genres (Nice to have)
 - [ ] Visualize prices
-- [ ] Create a front page with results
+- [ ] Build: How many pages are the total of the books
+- [ ] Build: Can you lend all books at once (10 books max)
+- [ ] Gemiddelde prijs boeken
 
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
