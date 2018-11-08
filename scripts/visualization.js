@@ -13,8 +13,7 @@ filterData
 			const categoryItem = checkCategory(d.price)
 			return {
 				...d,
-				category: categoryItem,
-				[categoryItem]: Number(d.price)
+				category: categoryItem
 			}
 		})
 
@@ -30,16 +29,30 @@ filterData
 			}))
 			.entries(newDataObject)
 
-		console.log(dataNesting)
-		const filteredData = dataNesting.map(items => ({
+		const statisticData = dataNesting.map(items => ({
 			...items.value,
 			category: items.key
 		}))
-		// // console.log(filteredData)
-		// createStackedBarChart(filteredData, data)
-		showDataStats(filteredData, data)
+
+		//Thanks Folkert Jan
+		const filteredData = d3
+			.nest()
+			.key(d => d.category)
+			.entries(newDataObject)
+			.map(category => ({
+				...category,
+				total: category.values.length,
+				indexedItems: category.values.map((item, index) => ({
+					y: [index, item.price],
+					...item
+				}))
+			}))
+
+		console.log(filteredData)
+		createStackedBarChart(filteredData, data)
+		showDataStats(statisticData, data)
 	})
-	.catch(err => console.error('no data'))
+	.catch(err => console.error('no data', err))
 
 function checkCategory(price) {
 	// needs to become a switch case
@@ -56,23 +69,16 @@ function checkCategory(price) {
 
 function createStackedBarChart(data, totalData) {
 	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-		width = 500 - margin.left - margin.right,
-		height = 300 - margin.top - margin.bottom
+		width = 960 - margin.left - margin.right,
+		height = 600 - margin.top - margin.bottom
 
-	// const totalPrices = data.map(d => d.values)
-	// console.log(totalData)
-	//Thanks Folkert Jan
+	//Thanks Folkert Jan for the base of my d3 visualisation
+	var y = d3.scaleBand().rangeRound([0, width])
+
 	var x = d3
-		.scaleBand()
-		.domain(10)
-		.range([0, width])
-		.paddingInner(0.3)
-		.paddingOuter(0.3)
-
-	var y = d3
 		.scaleLinear()
-		.range([height, 0])
-		.domain([0, 50])
+		.rangeRound([height - margin.bottom, margin.top])
+		.domain([60, 0])
 
 	const color = d3
 		.scaleLinear()
@@ -80,47 +86,58 @@ function createStackedBarChart(data, totalData) {
 		.interpolate(d3.interpolateHcl)
 		.range([d3.rgb('#007AFF'), d3.rgb('#FFF500')])
 
-	const xAxis = g =>
-		g
-			.attr('transform', `translate(0,${height - margin.bottom})`)
-			.call(d3.axisBottom(x).tickSizeOuter(0))
-			.call(g => g.selectAll('.domain').remove())
-
-	const yAxis = g =>
-		g
-			.attr('transform', `translate(${margin.left},0)`)
-			.call(d3.axisLeft(y).ticks(null, 's'))
-			.call(g => g.selectAll('.domain').remove())
-
-	var svg = d3
+	const svg = d3
 		.select('#stackedChart')
 		.append('svg')
-		.attr('width', width)
-		.attr('height', height)
+		.attr('width', width + margin.left + margin.right)
+		.attr('height', height + margin.top + margin.bottom)
 
-	const filteredData = data.map(item => item)
-	console.log(filteredData)
 	svg.selectAll('g')
-		.data(filteredData.numbers)
+		.data(data)
 		.enter()
-		.append('g') // every language one group
-		.attr('fill', (d, index) => color(index))
+		.append('g')
+		.attr('transform', 'translate(40,-5)')
 		.selectAll('rect')
-		.data(d => d)
+		.data(d => d.indexedItems)
 		.enter()
-		.append('rect') // every year in language one rect
-		.attr('width', x.bandwidth())
-		.attr('height', d => {
-			console.log(d)
-			return y(d.y[1] - d.y[0])
+		.append('rect')
+		.attr('width', d => d.price * 10)
+		.attr('height', 50)
+		.attr('data-val', d => d.price)
+		.attr('x', d => y(d.price))
+		.attr('y', d => {
+			return height - x(d.y[1])
 		})
-		.attr('data-lang', d => d.category)
-		.attr('x', d => xScale(Number(d.value)))
-		.attr('y', d => height - yScale(d.y[1]))
+		.attr('fill', (d, index) => color(index))
+		.on('mouseover', function(d) {
+			console.log(d)
+			var xPosition =
+				parseFloat(d3.select(this).attr('x')) + y.bandwidth()
+			var yPosition = parseFloat(d3.select(this).attr('y')) / 2 + height
 
-	svg.append('g').call(xAxis)
+			d3.select('#tooltip')
+				.style('left', xPosition + 'px')
+				.style('top', yPosition + 'px')
+				.select('#value')
+				.text(
+					`${d.title}	${d.author ? d.author + ',' : ''} prijs: €${
+						d.price
+					}`
+				)
 
-	svg.append('g').call(yAxis)
+			d3.select('#tooltip').classed('hidden', false)
+		})
+		.on('mouseout', function() {
+			d3.select('#tooltip').classed('hidden', true)
+		})
+
+	svg.append('g')
+		.attr('transform', `translate(20,${height})`)
+		.call(d3.axisBottom(x))
+
+	svg.append('g')
+		.attr('transform', `translate(20,30)`)
+		.call(d3.axisLeft(y))
 }
 
 function showDataStats(data, totalData) {
