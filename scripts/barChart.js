@@ -1,6 +1,4 @@
-const filterData = fetch(
-	'https://functional-programming.netlify.com/cleanBookData.json'
-)
+const filterData = fetch('http://127.0.0.1:5500/cleanBookData.json')
 	.then(res => {
 		return res.json()
 	})

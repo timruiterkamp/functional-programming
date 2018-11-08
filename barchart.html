@@ -5,21 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Functional programming</title>
-    <link rel="stylesheet" href="style/style-min.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <form>
-        <select id="bookFiltering">
-            <option value="allBooks">All books</option>
-            <option value="nonExpensiveBooks">Least expensive books</option>
-            <option value="mediumExpensiveBooks">Medium expensive books</option>
-            <option value="expensiveBooks">Expensive books</option>
-            <option value="mostExpensiveBooks">Most expensive books</option>
-        </select>
-    </form>
-    <svg></svg>
+    <header>
+        <h1>Public library of Amsterdam research case</h1>
+        <h2>How many books do you need to read to earn your subscription back?</h2>
+    </header>
+    <main>
+        <section class="information">
+            <article class="card card-subscription">
+                <header>
+                    <h3>The subscription value of the library card:</h3>
+                </header>
+                <ul>
+                    <li>OBA total: €42</li>
+                    <li>OBA total + AdamNet-card: €55</li>
+                    <li>OBA basic: €32</li>
+                    <li>OBA young adults & elder: €22</li>
+                    <li>OBA low income: €5</li>
+                </ul>
+            </article>
+        </section>
+        <form>
+            <select id="bookFiltering">
+                <option value="allBooks">All books</option>
+                <option value="nonExpensiveBooks">Least expensive books</option>
+                <option value="mediumExpensiveBooks">Medium expensive books</option>
+                <option value="expensiveBooks">Expensive books</option>
+                <option value="mostExpensiveBooks">Most expensive books</option>
+            </select>
+        </form>
+        <svg></svg>
+        
+        <section class="barchart">
+            <p><a href="index.html">Go back to the home page</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>Created by <a href="https://github.com/timruiterkamp">Tim Ruiterkamp</a></p>
+        <p>Repository with README can be found at <a href="https://github.com/timruiterkamp/functional-programming">Github</a></p>
+        
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="scripts/barchart.js"></script>
+    </footer>
 </body>
-
-<script src="https://d3js.org/d3.v5.js"></script>
-<script src="scripts/barChart.js"></script>
 </html>
