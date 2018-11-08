@@ -1,4 +1,6 @@
-const filterData = fetch('http://localhost:1337/api')
+const filterData = fetch(
+	'https://functional-programming.netlify.com/cleanBookData.json'
+)
 	.then(res => {
 		return res.json()
 	})
