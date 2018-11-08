@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Functional programming</title>
-    <link rel="stylesheet" href="style/style-min.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <form>
-        <select id="bookFiltering">
-            <option value="allBooks">All books</option>
-            <option value="nonExpensiveBooks">Least expensive books</option>
-            <option value="mediumExpensiveBooks">Medium expensive books</option>
-            <option value="expensiveBooks">Expensive books</option>
-            <option value="mostExpensiveBooks">Most expensive books</option>
-        </select>
-    </form>
-    <svg></svg>
+    <header>
+        <h1>Public library of Amsterdam research case</h1>
+        <h2>How many books do you need to read to earn your subscription back?</h2>
+    </header>
+    <main>
+        <section class="information">
+            <article class="card card-subscription">
+                <header>
+                    <h3>The subscription value of the library card:</h3>
+                </header>
+                <ul>
+                    <li>OBA total: €42</li>
+                    <li>OBA total + AdamNet-card: €55</li>
+                    <li>OBA basic: €32</li>
+                    <li>OBA young adults & elder: €22</li>
+                    <li>OBA low income: €5</li>
+                </ul>
+            </article>
+            <article class="card card-analyis-results">
+                    <header>
+                        <h3>The results of genre analysis</h3>
+                    </header>
+                    <ul>
+                        <li>Genre: <span>Avonturenroman</span></li>
+                        <li>Total amount of books with price: <span id="bookAmount"></span></li>
+                        <li>Total value: <span id='totalvalue'></span></li>
+                        <li>Amount of books below €12: <span id='lowValueBooks'></span></li>
+                        <li>Amount of books between €12 & €20: <span id='mediumValueBooks'></span></li>
+                        <li>Amount of books above €20: <span id='highValueBooks'></span></li>
+                    </ul>
+                </article>
+        </section>
+        <section class="visualization">
+            <label><input type="checkbox">Sort</label><br>
+            <section id ="stackedChart"></div>
+            <div id="legend"></div>
+        </section>
+        <section class="barchart">
+            <p><a href="barchart.html">A seperate barchart sorted by category</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>Created by <a href="https://github.com/timruiterkamp">Tim Ruiterkamp</a></p>
+        <p>Repository with README can be found at <a href="https://github.com/timruiterkamp/functional-programming">Github</a></p>
+        
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="scripts/visualization.js"></script>
+    </footer>
 </body>
-
-<script src="https://d3js.org/d3.v5.js"></script>
-<script src="scripts/visualization.js"></script>
 </html>

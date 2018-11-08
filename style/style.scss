@@ -1,18 +1,15 @@
-svg {
-    font: 10px sans-serif;
-    shape-rendering: crispEdges;
-}
+// color definitions
+$dark-color: #3a3a3a;
+$light-color: #90C2E7;
+$turqoise: #00A9A5;
+$text: #4E8098;
+$black-transparent: rgba(0,0,0,.15);
+$light-gray: #efefef;
+$mediumLight-gray: #eaeaea;
 
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-}
 
-path.domain {
-    stroke: none;
-}
 
-.y .tick line {
-    stroke: #ddd;
-}
+@import 
+'page/page.scss',
+'page/graph.scss',
+'page/card.scss'

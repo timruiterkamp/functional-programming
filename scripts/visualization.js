@@ -7,111 +7,137 @@ const filterData = fetch('http://localhost:1337/api')
 
 filterData
 	.then(data => {
-		const bookStacks = createStack(data, 'price')
-		const chosenBooks = bookStacks.allBooks[0]
-		const max = bookStacks.allBooks.map(d => {
-			const value = d.map(item => item[1]).map(items => items)
-			return d3.max(value)
+		const newDataObject = data.map(d => {
+			const categoryItem = checkCategory(d.price)
+			return {
+				...d,
+				category: categoryItem,
+				[categoryItem]: Number(d.price)
+			}
 		})
-		const margin = { top: 20, right: 160, bottom: 35, left: 30 },
-			width = 960 - margin.left - margin.right,
-			height = 500 - margin.top - margin.bottom,
-			barHeight = 20
 
-		let x = d3
-			.scaleLinear()
-			.domain([0, max[0]])
-			.range([0, 500])
+		const dataNesting = d3
+			.nest()
+			.key(d => d.category)
+			.rollup(v => ({
+				avg: d3.mean(v, d => d.price),
+				total: d3.sum(v, d => d.price),
+				minMax: d3.extent(v, d => d.price),
+				items: v,
+				numbers: v.map(item => item.price)
+			}))
+			.entries(newDataObject)
 
-		const container = d3
-			.select('svg')
-			.attr('width', width)
-			.attr('height', 20 * data.length)
-
-		const bar = container
-			.selectAll('g')
-			.data(chosenBooks)
-			.enter()
-			.append('g')
-			.attr('transform', function(d, i) {
-				return 'translate(0,' + i * 20 + ')'
-			})
-
-		bar.append('rect')
-			.attr('width', d => d.data.price)
-			// add this attribute to change the color of the rect
-			.attr('fill', function(d) {
-				if (d[1] > 25) {
-					return 'red'
-				} else if (d[1] > 10) {
-					return 'orange'
-				}
-				return 'yellow'
-			})
-			.attr('height', 20 - 1)
-
-		bar.append('text')
-			.attr('x', d => d.data.price)
-			.attr('y', barHeight / 2)
-			.attr('dy', '.35em')
-			// add this attribute to change the color of the text
-			.attr('fill', function(d) {
-				if (d.data.title > 10) {
-					return 'purple'
-				}
-				return 'black'
-			})
-			.text(d => `${d.data.title}, €${d.data.price}`)
+		console.log(dataNesting)
+		const filteredData = dataNesting.map(items => ({
+			...items.value,
+			category: items.key
+		}))
+		// // console.log(filteredData)
+		// createStackedBarChart(filteredData, data)
+		showDataStats(filteredData, data)
 	})
 	.catch(err => console.error('no data'))
 
-/**
- * Create a d3 stack
- * @param createStack
- * @param {array} data - The data to create a d3 stack on.
- * @param {string} filter - The filter keyword were data will be filtered on
- */
-
-function createStack(data, filter) {
-	const stack = d3
-		.stack()
-		.keys([filter])
-		.order(d3.stackOrderNone)
-		.offset(d3.stackOffsetNone)
-
-	const series = stack(data)
-
-	const nonExpensiveBooks = series.map(data => data.filter(d => d[1] <= 7))
-	const mediumExpensiveBooks = series.map(data =>
-		data.filter(d => d[1] > 7 && d[1] < 15)
-	)
-	const expensiveBooks = series.map(data =>
-		data.filter(d => d[1] > 15 && d[1] < 20)
-	)
-	const mostExpensiveBooks = series.map(data => data.filter(d => d[1] > 20))
-	const allBooks = series.map(data => data.filter(d => d[1]))
-	const bookCategories = {
-		allBooks: allBooks,
-		nonExpensiveBooks: nonExpensiveBooks[0],
-		mediumExpensiveBooks: mediumExpensiveBooks[0],
-		expensiveBooks: expensiveBooks[0],
-		mostExpensiveBooks: mostExpensiveBooks[0]
+function checkCategory(price) {
+	// needs to become a switch case
+	if (price <= 12) {
+		return 'least'
+	} else if (price >= 12 && price < 20) {
+		return 'medium'
+	} else if (price >= 20) {
+		return 'most'
+	} else {
+		price
 	}
-	return bookCategories
 }
 
-/**
- * Create a bar chart
- * @param createBarChartWithText
- * @param {array} data - The data to that will be shown
- * @param {number} width - width of the chart
- * @param {number} height - height of the chart
- * @param {number} barHeight - height of the bar
- * @param {string} selector - selector where the chart will append on
- * @param {number} max - the maximum number of the chart
- */
+function createStackedBarChart(data, totalData) {
+	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+		width = 500 - margin.left - margin.right,
+		height = 300 - margin.top - margin.bottom
 
-function createBarChartWithText(data, options = {}, max) {
-	console.log(data)
-	const { width, height, barHeight, selector } = options
+	// const totalPrices = data.map(d => d.values)
+	// console.log(totalData)
+	//Thanks Folkert Jan
+	var x = d3
+		.scaleBand()
+		.domain(10)
+		.range([0, width])
+		.paddingInner(0.3)
+		.paddingOuter(0.3)
+
+	var y = d3
+		.scaleLinear()
+		.range([height, 0])
+		.domain([0, 50])
+
+	const color = d3
+		.scaleLinear()
+		.domain([1, totalData.length])
+		.interpolate(d3.interpolateHcl)
+		.range([d3.rgb('#007AFF'), d3.rgb('#FFF500')])
+
+	const xAxis = g =>
+		g
+			.attr('transform', `translate(0,${height - margin.bottom})`)
+			.call(d3.axisBottom(x).tickSizeOuter(0))
+			.call(g => g.selectAll('.domain').remove())
+
+	const yAxis = g =>
+		g
+			.attr('transform', `translate(${margin.left},0)`)
+			.call(d3.axisLeft(y).ticks(null, 's'))
+			.call(g => g.selectAll('.domain').remove())
+
+	var svg = d3
+		.select('#stackedChart')
+		.append('svg')
+		.attr('width', width)
+		.attr('height', height)
+
+	const filteredData = data.map(item => item)
+	console.log(filteredData)
+	svg.selectAll('g')
+		.data(filteredData.numbers)
+		.enter()
+		.append('g') // every language one group
+		.attr('fill', (d, index) => color(index))
+		.selectAll('rect')
+		.data(d => d)
+		.enter()
+		.append('rect') // every year in language one rect
+		.attr('width', x.bandwidth())
+		.attr('height', d => {
+			console.log(d)
+			return y(d.y[1] - d.y[0])
+		})
+		.attr('data-lang', d => d.category)
+		.attr('x', d => xScale(Number(d.value)))
+		.attr('y', d => height - yScale(d.y[1]))
+
+	svg.append('g').call(xAxis)
+
+	svg.append('g').call(yAxis)
+}
+
+function showDataStats(data, totalData) {
+	const bookamount = document.querySelector('#bookAmount')
+	const totalValue = document.querySelector('#totalvalue')
+	const lowValueBooks = document.querySelector('#lowValueBooks')
+	const mediumValueBooks = document.querySelector('#mediumValueBooks')
+	const highValueBooks = document.querySelector('#highValueBooks')
+
+	const totalPrice = d3
+		.nest()
+		.key(d => d.total)
+		.entries(data)
+		.map(data => Number(data.key))
+		.reduce((base, value) => base + value)
+
+	bookamount.textContent = `${totalData.length} books`
+	totalValue.textContent = `€${totalPrice}`
+	lowValueBooks.textContent = `${data[0].items.length} books`
+	mediumValueBooks.textContent = `${data[1].items.length} books`
+	highValueBooks.textContent = `${data[2].items.length} books`
 }

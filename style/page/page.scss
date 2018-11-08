@@ -1,0 +1,54 @@
+
+body {
+    padding: 0;
+    margin: 0 auto;
+    background-color: white;
+}
+
+header {
+    text-align: center;
+
+    h1 {
+        color: $dark-color;
+        font-size: 2.5em;
+        text-align: center;
+    }
+    h2 {
+        color: $turqoise;
+        font-size: 1.5em;
+        text-align: center;
+    }
+}
+
+main {
+
+    padding: 3em;
+
+    p {
+        color: #092327;
+        font-size: 1em;
+    }
+
+    section.barchart {
+        text-align: center;
+        padding: 2em 0;
+    }
+
+    section.information {
+        display: flex;
+        flex-direction: row;
+    }
+
+}
+
+footer {
+    text-align: center;
+    background-color: $light-gray;
+    border-top: 1px solid $mediumLight-gray;
+    color: $dark-color;
+    padding: 2em 0;
+
+    a {
+        color: $dark-color;
+    }
+}
