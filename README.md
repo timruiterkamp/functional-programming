@@ -3,7 +3,7 @@
 In this project I will research a case based on information i have extracted from the OBA Api. 
 The chosen case can be found [here](#Chosen-research-case). The project overal was very fun to do and with the thought of challenging myself by not blocking the possibilities of just the OBA Api, I used Puppeteer to create my own scraper that scrapes prices of books.
 
-The product van be found here: (https://functional-programming.netlify.com)[https://functional-programming.netlify.com]
+The product van be found here: [https://functional-programming.netlify.com](https://functional-programming.netlify.com)
 
 ## Table of contents
 
