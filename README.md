@@ -13,10 +13,10 @@ The product van be found here: [https://functional-programming.netlify.com](http
     * [Subquestions](#subquestions)
 * [Overview research case](#Overview-research-case)
     * [Results along the way](#Outcomes-along-the-way)
-* [Proces](#Proces)
-    * [Week 1](#Week-1)
-    * [Week 2](#Week-2)
+* [Result](#Endresult)
+* [Todo](#Yet-TODO)
 * [The scraper](#The-bol.com-scraper)
+* [Conclusion](#Conclusion)
 * [Techniques used](#Techniques-used)
 * [Code description](#Code-description)
 
