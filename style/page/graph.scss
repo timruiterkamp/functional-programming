@@ -3,6 +3,10 @@ section#stackedChart, section#bookchart {
     padding: 1em;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.15);
     margin: 3em auto;
+
+    h3 {
+        padding-left: 3em;
+    }
 }
 
 rect:hover {
