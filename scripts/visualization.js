@@ -84,15 +84,9 @@ function createStackedBarChart(data, totalData) {
 
 	const color = d3
 		.scaleLinear()
-		.domain([1, data.length])
+		.domain([1, 20])
 		.interpolate(d3.interpolateHcl)
-		.range([d3.rgb('#00A9A5'), d3.rgb('#90C2E7')])
-
-	// const itemColor = d3
-	// 	.scaleLinear()
-	// 	.domain([1, totalData.length])
-	// 	.interpolate(d3.interpolateHcl)
-	// 	.range([d3.rgb('#007AFF'), d3.rgb('#FFF500')])
+		.range([d3.rgb('#c31432'), d3.rgb('#ff0')])
 
 	const svg = d3
 		.select('#stackedChart')
@@ -113,7 +107,7 @@ function createStackedBarChart(data, totalData) {
 					index * 70})`
 		)
 		.attr('height', 50)
-		.attr('fill', (d, index) => color(index))
+		// .attr('fill', (d, index) => color(index))
 		.attr('y', (d, index) => index * 20)
 
 		.selectAll('rect')
@@ -127,9 +121,9 @@ function createStackedBarChart(data, totalData) {
 		.attr('height', 50)
 		.attr('data-val', d => d.price)
 		.attr('x', d => y(d.price))
-		.attr('opacity', (d, index) => `0.${index * 1 + 1}`)
-		// .attr('fill', (d, index) => color(d, index))
+		.attr('fill', (d, index) => color(index))
 
+		// summon the tooltip
 		.on('mouseover', function(d) {
 			var xPosition =
 				parseFloat(d3.select(this).attr('x')) + y.bandwidth()
