@@ -8,12 +8,13 @@ The product van be found here: [https://functional-programming.netlify.com](http
 ## Table of contents
 
 * [Installation of the project](#Installation-of-the-project)
-* [Possible research cases](#Possible-research-cases)
+* [Possible research cases](#possible-research-cases-️)
 * [Chosen research case](#Chosen-research-case)
     * [Subquestions](#subquestions)
 * [Overview research case](#Overview-research-case)
-    * [Results along the way](#Outcomes-along-the-way)
-* [Result](#Endresult)
+    * [Sketch](#sketch-of-the-possible-outcome-️)
+    * [Results along the way](#outcomes-along-the-way-)
+* [Result](#endresult-)
 * [Todo](#Yet-TODO)
 * [The scraper](#The-bol.com-scraper)
 * [Conclusion](#Conclusion)
