@@ -242,5 +242,9 @@ To get back on my research case: How many books do you need to lend to get the v
 | ./api/helpers/objectHelper | Handle Object requests |
 | ./api/scraper/scraper |    The bol.com scraper logic   |
 
+## Honorable mentions
+I want to like Folkert-Jan van der Pol and Dennis Wegereef for sharing code and knowledge.
+
+
 ## License
 [MIT LICENSE](license.txt)
