@@ -127,7 +127,7 @@ function createStackedBarChart(data, totalData) {
 		.attr('height', 50)
 		.attr('data-val', d => d.price)
 		.attr('x', d => y(d.price))
-		.attr('opacity', (d, index) => `0.${index * 1}`)
+		.attr('opacity', (d, index) => `0.${index * 1 + 1}`)
 		// .attr('fill', (d, index) => color(d, index))
 
 		.on('mouseover', function(d) {
