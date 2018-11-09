@@ -183,8 +183,6 @@ I still struggle with understanding how exactly the points of the chart are draw
 !['Visualization'](https://github.com/timruiterkamp/functional-programming/blob/master/functional-programming-outcome.png)
 
 
-## Proces 📈
-
 ### Yet TODO
 - [x] Get price of a product
 - [x] Sort on 'tweedehands' and 'Nederlandstalig'
@@ -196,64 +194,6 @@ I still struggle with understanding how exactly the points of the chart are draw
 - [ ] Build: How many pages are the total of the books
 - [ ] Build: Can you lend all books at once (10 books max)
 - [X] Gemiddelde prijs boeken (This can be done with d3.mean)
-
-To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
-### Week 1
-
--   Monday
-    -   Talks about the project  
-    -   I have connected to the api and started basic analysing the assets of the api  
-    -   I did set up a basic server and converted the xml to json to get a better overview  
-    ***
--   Tuesday
-    -   Started thinking about questions  
-    -   Analysed multiple results I got and decided if I could use it for my possible research case.  
-    -   Build basic function to get and filter results from the API  
-    -   I ran into some difficulties filtering the right data and ended up in a way too long chain of      maps. Then I were introduced to jsonpath, it's a library that searches strings you pass into       it an returns the object.
-    ***
--   Wednesday
-    -   Refactored my code to seperate helper functions from my request functions 
-    -   Supported a getAll function so more than 20 results would come in.
-    -   Rethinked my questions and possibilities and ended up chosing an awesome project
-    -   Set up the filter to match my criteria I needed
-    ***
--   Thursday
-    -   Fixed my filter function, it now gives object with matching results instead of seperate            results that could'nt be matched.
-    -   Updated my readme and process while thinking of next steps I should dive into
-    -   Started on the webscraper for amazon to get the prices
-    -   Tried connecting to amazon and ebay API but got stuck in authentication errors
-    -   After multiple tries I decided to create my own scraper with puppeteer and I got the prices!
-    ***
--   Friday
-    -   Finetuned the scraper to select only books and using the filters 'nederlandstaling' and            'tweedehans' on the bol.com website to get realistic results.
-    -   Got an awesome talk about D3 and Observable where I got new insights in the possibilites of        the D3 library.
-    -   I refactored a lot of my code into more functional setup
----
-
-### Week 2
-
--   Monday
-    -   Over the weekend I finished my scraper and support one or many searches
-    -   I refactored a lot of code to make it more neat
-    -   On monday I seperated my api from my get requests as this shouldn't intervere eachother
-    -   Build in support for cases where no data is available and when there is data available
-    -   I've got more information about user safety on the web through a talk from Bits of Freedom
-    -   An presentation of D3 showed more in-depth knowledge about the working of certain elements in      the library and some showcases were shown to get us started
-    -   I added my sketches to the readme and updated it with more relevant information
-    -   Started with the D3 library in combination with my own filtered data
-    ***
-
--   Tuesday
-   
-    ***
--   Wednesday
-    
-    ***
--   Thursday
-    
-    ***
--   Friday
-   
 
 ## The bol.com scraper
 The bol.com scraper is a little scraper that returns the value of the first hit on bol.com in the book section of the page.
@@ -268,6 +208,16 @@ initScraper().then(scraper => {
 }
 // returns €6 for the dutch version
 ```
+
+## Conclusion
+
+Things I really learned during the last two weeks are most based on better understanding and thinking of creating data structures, write better functions (This can be found in the /api/index.js folder, the main index.js still needs to be cleaned up), working with D3 and setting up a webscraper.
+
+I never worked with D3 before but the library really got my interest. If I set aside my lack of knowledge I think I would make some more products with the library to see what it is capable of.
+
+I also had little experience with the puppeteer scraper and this was very fun to create and to see what it is capable of, despite I even haven't tried it's full potential yet. I will create some more projects with Puppeteer.
+
+To get back on my research case: How many books do you need to lend to get the value of your subscription back. If you would lend the 'De Weduve' from Saskia van der Lingen and read it, you would have most subscription values back. If you want to reach the highest subscription value you could add 'Heilige Oorlog' from Frank van der Knoop which is valued at €12. Combine these books and you would have a read books with a total value of €55, which is the same amount as the OBA totaal plus the AdamNet-card.  
 
 ## Techniques used
 * Puppeteer
