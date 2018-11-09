@@ -28,7 +28,6 @@ filterData
 				numbers: v.map(item => item.price)
 			}))
 			.entries(newDataObject)
-
 		const statisticData = dataNesting.map(items => ({
 			...items.value,
 			category: items.key
@@ -48,7 +47,6 @@ filterData
 				}))
 			}))
 
-		console.log(filteredData)
 		createStackedBarChart(filteredData, data)
 		showDataStats(statisticData, data)
 	})
@@ -69,22 +67,32 @@ function checkCategory(price) {
 
 function createStackedBarChart(data, totalData) {
 	var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-		width = 960 - margin.left - margin.right,
-		height = 600 - margin.top - margin.bottom
+		width = 600 - margin.left - margin.right,
+		height = 280 - margin.top - margin.bottom
 
 	//Thanks Folkert Jan for the base of my d3 visualisation
-	var y = d3.scaleBand().rangeRound([0, width])
+	var y = d3
+		.scaleBand()
+		.rangeRound([0, height])
+		.domain(['expensive', 'medium', 'cheapest'])
+		.padding(0.1, 0)
 
 	var x = d3
 		.scaleLinear()
-		.rangeRound([height - margin.bottom, margin.top])
+		.rangeRound([width, margin.top])
 		.domain([60, 0])
 
 	const color = d3
 		.scaleLinear()
-		.domain([1, totalData.length])
+		.domain([1, data.length])
 		.interpolate(d3.interpolateHcl)
-		.range([d3.rgb('#007AFF'), d3.rgb('#FFF500')])
+		.range([d3.rgb('#00A9A5'), d3.rgb('#90C2E7')])
+
+	// const itemColor = d3
+	// 	.scaleLinear()
+	// 	.domain([1, totalData.length])
+	// 	.interpolate(d3.interpolateHcl)
+	// 	.range([d3.rgb('#007AFF'), d3.rgb('#FFF500')])
 
 	const svg = d3
 		.select('#stackedChart')
@@ -95,22 +103,34 @@ function createStackedBarChart(data, totalData) {
 	svg.selectAll('g')
 		.data(data)
 		.enter()
+		//create group per category
 		.append('g')
-		.attr('transform', 'translate(40,-5)')
+		.attr(
+			'transform',
+			(d, index) =>
+				`translate(${margin.left + margin.top},${height -
+					50 -
+					index * 70})`
+		)
+		.attr('height', 50)
+		.attr('fill', (d, index) => color(index))
+		.attr('y', (d, index) => index * 20)
+
 		.selectAll('rect')
-		.data(d => d.indexedItems)
+		.data(d =>
+			d.indexedItems.map(item => item).sort((a, b) => b.price - a.price)
+		)
 		.enter()
+		//create rect per item in category
 		.append('rect')
-		.attr('width', d => d.price * 10)
+		.attr('width', d => (width / 60) * d.price)
 		.attr('height', 50)
 		.attr('data-val', d => d.price)
 		.attr('x', d => y(d.price))
-		.attr('y', d => {
-			return height - x(d.y[1])
-		})
-		.attr('fill', (d, index) => color(index))
+		.attr('opacity', (d, index) => `0.${index * 1}`)
+		// .attr('fill', (d, index) => color(d, index))
+
 		.on('mouseover', function(d) {
-			console.log(d)
 			var xPosition =
 				parseFloat(d3.select(this).attr('x')) + y.bandwidth()
 			var yPosition = parseFloat(d3.select(this).attr('y')) / 2 + height
@@ -120,23 +140,21 @@ function createStackedBarChart(data, totalData) {
 				.style('top', yPosition + 'px')
 				.select('#value')
 				.text(
-					`${d.title}	${d.author ? d.author + ',' : ''} prijs: €${
-						d.price
-					}`
+					`${d.title}
+					${d.author.length ? `${d.author},` : ''} 
+					prijs: €${d.price}`
 				)
 
 			d3.select('#tooltip').classed('hidden', false)
 		})
-		.on('mouseout', function() {
-			d3.select('#tooltip').classed('hidden', true)
-		})
+		.on('mouseout', () => d3.select('#tooltip').classed('hidden', true))
 
 	svg.append('g')
-		.attr('transform', `translate(20,${height})`)
+		.attr('transform', `translate(${margin.left},${height + 20})`)
 		.call(d3.axisBottom(x))
 
 	svg.append('g')
-		.attr('transform', `translate(20,30)`)
+		.attr('transform', `translate(60,20)`)
 		.call(d3.axisLeft(y))
 }
 
