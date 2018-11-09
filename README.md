@@ -1,4 +1,4 @@
-# Front-end applications OBA
+# Functional programming - High school of Amsterdam
 
 In this project I will research a case based on information i have extracted from the OBA Api. 
 The chosen case can be found [here](#Chosen-research-case). The project overal was very fun to do and with the thought of challenging myself by not blocking the possibilities of just the OBA Api, I used Puppeteer to create my own scraper that scrapes prices of books.
@@ -16,7 +16,6 @@ The product van be found here: [https://functional-programming.netlify.com](http
 * [Proces](#Proces)
     * [Week 1](#Week-1)
     * [Week 2](#Week-2)
-    * [Problems I ran into](#problems)
 * [The scraper](#The-bol.com-scraper)
 * [Techniques used](#Techniques-used)
 * [Code description](#Code-description)
@@ -24,7 +23,7 @@ The product van be found here: [https://functional-programming.netlify.com](http
 
 
 
-## Installation of the project
+## Installation of the project 
 
 ```bash
 git clone https://github.com/timruiterkamp/functional-programming.git
@@ -38,7 +37,7 @@ This project uses `.env`. The right setup is:
 PUBLIC_KEY=KEY
 SECRET_KEY=KEY
 ```  
-## Possible research cases
+## Possible research cases 🕵️
 
 * Are there more books to be lend out during spring than during fall, and what are the leading genres in these periods of time.  
 * Are the titles of childrenbooks under influence of populair babynames.   
@@ -103,22 +102,88 @@ New dataset item with the cleaned data:
 ]
 ```
 
-### Overview from all the results
+Problems with filtering I ran into:   
+To filter based on titles, authors and images I used the jsonpath package. The package works great but the downside was it deliverd seperate titles, authors and images that could not be matched with eachother. Because the behaviour of the package removes results it couldn't find. This results in a mismatch when i wanted to combine the results.
+  
+To tackle this problem I wrote a helper function that would use the objects and a string containing the search term. To keep the results matched I made a new object with the results found in a object containing all the terms.
+
+To give a better perspective of this confusing story here is a layout of the object:  
+before:  
+```JSON
+[
+    {
+    "id": [],
+    "frabl": [],
+    "detail-page": [],
+    "coverimages": [],
+    "titles": [],
+    "authors": [],
+    "formats": [],
+    "identifiers": [],
+    "publication": [],
+    "classification": [],
+    "languages": [],
+    "subjects": [],
+    "description": [],
+    "summaries": [],
+    "notes": [],
+    "target-audiences": [],
+    "librarian-info": [],
+    "undup-info": []
+    }
+]
+```
+
+after:  
+```JSON
+[
+    {
+    "author": [],
+    "title": [],
+    "languages": []
+    }
+]
+```
+
+### Overview from all the results 🕵️‍♂️
 !['All filtered results'](https://github.com/timruiterkamp/functional-programming/blob/master/json-overview.png)
 
-## Sketch of the possible outcome
+## Sketch of the possible outcome ✏️
 I am aiming for a visual representation of the amount of books that are needed to reach the costs of the subscription. The block for the books can be hovered to create an information layer about the book.
+
+When hovering the book it will be clear what book you need to get with the right author. 
 
 !['Idea of the possible outcome of my project'](https://github.com/timruiterkamp/functional-programming/blob/master/sketch-mockup-functional-program.jpg)
 
-## Outcomes along the way
+## Outcomes along the way 🚀
 * I used the search term roman and filtered by 'avonturenroman' to get results with variation in price   and possibly a nice outcome where multiple books end up costing the equivalent of the OBA      subscription, instead of just one science book.
 * There are 7 dutch translated Jaws books needed to get the subscription value back
 * The english (second hand) version of Jaws is twice as expensive as the dutch translated version
-* Unfortunately I couldn't track al the prices from bol.com
+* Unfortunately I couldn't track al the prices from bol.com due to some titles couldn't be found
+* It is very important to really think good about data structures before you pass them along, I took way to long on trying to rebuilding the data structures again in D3.
+* In the future I need to start sketching data structures and ask myself what items I really need, I took a couple hours every developing session where I had to rebuild certain pieces of the data.
+* Total amount of books with price: 76 books
+* Total value of the books: €834
+* Amount of books below €12: 58 books
+* Amount of books between €12 and €20: 12 books
+* Amount of books above €20: 6 books
+
+## Endresult 📊
+After a very long battle with D3 and trying to get my data structure to work I finally came a step closer to what I was aiming for. D3 is a very powerful library which can be used in many cases but it is quite a struggle to get started due to the many features that are available. 
+  
+Something that I ran into a couple of times was that a lot of examples are all made in deprecated versions of D3, which creates a level of extra research that needs to be done to rebuild the example and grab pieces that could become useful. I found it quite frustrating in the beginning that all the examples are with perfect data structures, which made me feel my data was kind of crappy. I had to do a lot of restructuring, rebuilding and redefining my data before I could use my data in the example.
+  
+I tried D3 directly from my code without using Observable, Observable is cool but in my opinion it takes less skill to build and results in a little understanding of D3 instead of a lot of knowledge.
+  
+I'm actually a bit sad that I didn't could come up with more data and realising my goal. It works a bit but if I had a couple days more I could finish my visualization and really make it calculate the total price divided by the price in the categories.  
+  
+I used many D3 functions like `D3.nest`, `D3.stack`, calculation functions like `D3.mean, D3.sum`.
+I still struggle with understanding how exactly the points of the chart are drawn but certainly thursday night and friday morning I got a better understanding of how it worked.
+
+!['Visualization'](https://github.com/timruiterkamp/functional-programming/blob/master/functional-programming-outcome.png)
 
 
-## Proces
+## Proces 📈
 
 ### Yet TODO
 - [x] Get price of a product
@@ -127,10 +192,10 @@ I am aiming for a visual representation of the amount of books that are needed t
 - [x] Create new object with prices
 - [X] Refactor index to clean code
 - [ ] Support multiple genres (Nice to have)
-- [ ] Visualize prices
+- [X] Visualize prices
 - [ ] Build: How many pages are the total of the books
 - [ ] Build: Can you lend all books at once (10 books max)
-- [ ] Gemiddelde prijs boeken
+- [X] Gemiddelde prijs boeken (This can be done with d3.mean)
 
 To give a good representation of the progress I've made I capture everyday and write about the progress I made, things I have done and problems I ran into.  
 ### Week 1
@@ -189,50 +254,7 @@ To give a good representation of the progress I've made I capture everyday and w
     ***
 -   Friday
    
-  
-## Problems I ran into  
-Problems with filtering I ran into:   
-To filter based on titles, authors and images I used the jsonpath package. The package works great but the downside was it deliverd seperate titles, authors and images that could not be matched with eachother. Because the behaviour of the package removes results it couldn't find. This results in a mismatch when i wanted to combine the results.
-  
-To tackle this problem I wrote a helper function that would use the objects and a string containing the search term. To keep the results matched I made a new object with the results found in a object containing all the terms.
 
-To give a better perspective of this confusing story here is a layout of the object:  
-before:  
-```JSON
-[
-    {
-    "id": [],
-    "frabl": [],
-    "detail-page": [],
-    "coverimages": [],
-    "titles": [],
-    "authors": [],
-    "formats": [],
-    "identifiers": [],
-    "publication": [],
-    "classification": [],
-    "languages": [],
-    "subjects": [],
-    "description": [],
-    "summaries": [],
-    "notes": [],
-    "target-audiences": [],
-    "librarian-info": [],
-    "undup-info": []
-    }
-]
-```
-
-after:  
-```JSON
-[
-    {
-    "author": [],
-    "title": [],
-    "languages": []
-    }
-]
-```
 ## The bol.com scraper
 The bol.com scraper is a little scraper that returns the value of the first hit on bol.com in the book section of the page.
 
@@ -253,6 +275,7 @@ initScraper().then(scraper => {
 * Promises
 * jsonpath
 * Axios
+* D3
 
 ## Code description
 | Files   |      Description      |
